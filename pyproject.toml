@@ -1,0 +1,17 @@
+[project]
+name = "learning-mcp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "SyedSafdarAliShah", email = "programmersafdar@live.com" }
+]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+learning-mcp = "learning_mcp:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
