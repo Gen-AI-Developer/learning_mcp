@@ -1,0 +1,4 @@
+Model Context Protocol (MCP) is a communication layer that provides Claude with context
+and tools without requiring you to write a bunch of tedious integration code. Think of it as a
+way to shift the burden of tool definitions and execution away from your server to specialized
+MCP servers.
