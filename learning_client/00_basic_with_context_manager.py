@@ -1,4 +1,8 @@
-# with is keyword used for context
+# with is keyword used for context Managers, we open and close sessions
+#  by using it. 
+#  Now here we are opening and closing the file by using with keyword, it
+# opens a file for 'r' permissions which means read, so with keyword will
+# safely open a file for read session and close it.
 with open("data.txt", 'r') as data:
     textdata = data.readlines()
     for content in textdata:
