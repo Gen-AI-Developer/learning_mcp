@@ -28,11 +28,34 @@ async def get_connection(name):
 #         async with await get_connection("server_b") as server_b:
 #             print(f"USING CONNECTION:-> {server_a} and {server_b}")
 # asyncio.run(main())
+# without locals scope identifiers
+# async def main():
+#     async with AsyncExitStack() as stack:
+#         a = await stack.enter_async_context(await get_connection("server_a"))
+#         if a =='server_':
+#             b = await stack.enter_async_context(await get_connection("server_b"))
+#             print(f"USING CONNECTION:-> {a} and {b}")
+#         async def _custom_cleanup():
+#             print(f"..CustomCleanUp..")
+#         stack.push_async_callback(_custom_cleanup)
+#         # print(f"Doing Some Work with {a} and {b if 'b' in locals else "no B"}")
+#         print(f"Doing work with {a} and {b}")
+#         await asyncio.sleep(2.2)
 
+# asyncio.run(main())
+
+# with Locals
 async def main():
     async with AsyncExitStack() as stack:
         a = await stack.enter_async_context(await get_connection("server_a"))
-        b = await stack.enter_async_context(await get_connection("server_b"))
-        print(f"USING CONNECTION:-> {a} and {b}")
+        if a =='server_a':
+            b = await stack.enter_async_context(await get_connection("server_b"))
+            print(f"USING CONNECTION:-> {a} and {b}")
+        async def _custom_cleanup():
+            print(f"..CustomCleanUp..")
+        stack.push_async_callback(_custom_cleanup)
+        # print(f"Doing Some Work with {a} and {b if 'b' in locals else "no B"}")
+        print(f"Doing work with {a} and {locals().get('b')}")
+        await asyncio.sleep(2.2)
 
 asyncio.run(main())
