@@ -7,7 +7,12 @@ authors = [
     { name = "SyedSafdarAliShah", email = "programmersafdar@live.com" }
 ]
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp>=1.12.2",
+    "requests>=2.32.4",
+    "uvicorn>=0.35.0",
+]
 
 [project.scripts]
 learning-mcp = "learning_mcp:main"
