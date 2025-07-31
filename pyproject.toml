@@ -3,20 +3,10 @@ name = "learning-mcp"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-authors = [
-    { name = "SyedSafdarAliShah", email = "programmersafdar@live.com" }
-]
 requires-python = ">=3.11"
 dependencies = [
     "httpx>=0.28.1",
-    "mcp>=1.12.2",
+    "mcp[cli]>=1.12.2",
     "requests>=2.32.4",
     "uvicorn>=0.35.0",
 ]
-
-[project.scripts]
-learning-mcp = "learning_mcp:main"
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
