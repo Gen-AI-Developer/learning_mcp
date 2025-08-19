@@ -2,7 +2,7 @@ import requests
 URL = "http://localhost:8000/mcp"
 PAYLOAD = {
     "jsonrpc": "2.0",
-    "method":"mcp",
+    "method":"tools/list",
     "params": {},
     "id": 1,
 }
