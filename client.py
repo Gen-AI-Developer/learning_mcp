@@ -29,10 +29,11 @@ class MCPClient:
     async def list_resource(self) -> list[types.Resource]:
         result = await self._session.list_resources()
         return result.resources if result else []
+    
     async def read_resourse(self, uri:str)->types.ReadResourceResult:
         assert self._session,"Session unavailable, please reset"
         _url = AnyUrl(uri)
-        print(f" url = {_url}")
+        # print(f" url = {_url}")
         result = await self._session.read_resource(_url)
         resource = result.contents[0]
         if isinstance(resource,types.TextResourceContents):
@@ -48,10 +49,15 @@ class MCPClient:
         # print(f"Dictionary of RESULT: {result.__dict__}")
         return result
         
+    async def read_resource_template(self) -> list[types.ResourceTemplate]:
+        assert self._session,"Session Not Avaliable"
+        result: types.ListResourceTemplatesResult = await self._session.list_resource_templates()
+        # print("List Resource Template", result.__dict__)
+        return result.resourceTemplates
 async def main():
     async with MCPClient("http://localhost:8000/mcp") as client:
-        tools = await client.list_tool()
-        print(f"Available Tools : {tools}")
+        # tools = await client.list_tool()
+        # print(f"Available Tools : {tools}")
         # for tool in tools:
         #     print(f"Availabe tool = {tool.name}")
         # if tools:
@@ -59,13 +65,24 @@ async def main():
         #         if tool.name =="read_doc":
         #             result = await client.call_tool(tool.name,)
         #             print(f"Result from {tool}:", result)
-        resource = await client.list_resource()
-        print("Resource info:", resource)   
+        # resource = await client.list_resource()
+        # print("Resource info:", resource)   
         
-        read_resource = await client.read_resourse(resource[0].uri)
-        # read_resource = await client.read_resourse('docs://documents')
-        print("data",read_resource)
+        # read_resource = await client.read_resourse(resource[0].uri)
+        # # read_resource = await client.read_resourse('docs://documents')
+        # print("data",read_resource)
         # print(type(read_resource))
+        # resourselist = await client.list_resource()
+        # print("Resource List = ", resourselist)
+        values = await client.read_resource_template()
+        url = values[0].uriTemplate
+        # for doc in client.list_resource():
+        all_resource = await client.read_resourse("docs://documents")
+        # print("all Resources : ", all_resource)
+        
+        for r in all_resource:
+            result = await client.read_resourse(url.replace("{doc_name}",r))
+            print(result)
         
 if __name__ == "__main__":
     asyncio.run(main())
