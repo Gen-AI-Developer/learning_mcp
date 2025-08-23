@@ -30,11 +30,14 @@ class MCPClient:
 async def main():
     async with MCPClient("http://localhost:8000/mcp") as client:
         tools = await client.list_tool()
-        print("Available tools:", tools)
-        if tools:
-            tool_name = tools[0].name
-            result = await client.call_tool(tool_name, "example_arg")
-            print(f"Result from {tool_name}:", result)
+        print(f"Available Tools : {tools}")
+        # for tool in tools:
+        #     print(f"Availabe tool = {tool.name}")
+        # if tools:
+        #     for tool in tools:
+        #         if tool.name =="read_doc":
+        #             result = await client.call_tool(tool.name,)
+        #             print(f"Result from {tool}:", result)
         resource = await client.resource()
         print("Resource info:", resource)   
 
