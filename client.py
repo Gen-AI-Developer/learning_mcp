@@ -65,7 +65,7 @@ async def main():
     async with MCPClient("http://localhost:8000/mcp") as client:
         prompts = await client.list_prompts()
         print(prompts)
-        prompt = await client.read_prompts(prompts[0].name,prompts[0].arguments)
+        prompt = await client.read_prompts()
         print("Prompts:", prompt)
         
         tools = await client.list_tool()
